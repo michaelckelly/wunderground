@@ -1,0 +1,17 @@
+{
+  "name": "wunderground",
+  "version": "0.0.0",
+  "author": "Michael Kelly <m@michaelckelly.com>",
+  "description": "a simple wrapper around the wunderground API",
+  "main": "./lib/http-server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mck9235/wunderground.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.6"
+  }
+}
+
+            
