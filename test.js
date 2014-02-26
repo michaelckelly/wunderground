@@ -6,6 +6,6 @@ var q = {
 	state         : 'NC'
 };
 
-wunderground.forecast(q, function(err, res) {
-	console.log(res);
+wunderground.forecast10day(q, function(err, res) {
+	console.log(err||res);
 });

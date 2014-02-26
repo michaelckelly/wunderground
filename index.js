@@ -1,7 +1,5 @@
-var client = require('./client');
+var Client = require('./client');
 
-var initializer = function(api_key) {
-	return new client(api_key);
+module.exports = function(api_key) {
+	return new Client(api_key);
 }
-
-module.exports = initializer;
