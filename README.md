@@ -1,7 +1,7 @@
 wunderground
 ============
 
-A simple wrapper around the Wunderground API for Node
+A simple wrapper around the [Wunderground API](http://www.wunderground.com/weather/api) for Node.
 
 Why?
 ====
@@ -14,12 +14,14 @@ The module is designed to be simple and easy to use and follows Wunderground's A
 ```javascript
 var wunderground = require('node-wunderground')('my-api-key');
 
-var q = {
+var query = {
 	city  : 'San Francisco',
 	state : 'California'
 };
 
-wunderground.forecast10day(q, function(err, forecast) {
+wunderground.forecast10day(query, function(err, forecast) {
 	// do fun stuff here!
 });
 ```
+
+The module accepts a variety of parameters in the query object:

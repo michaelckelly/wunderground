@@ -2,10 +2,15 @@ var wunderground = require('./')('5359fc99b34815ef');
 
 var q = {
 	international : false,
-	city          : 'Durham',
-	state         : 'NC'
+	zip           : '20854'
 };
 
-wunderground.forecast10day(q, function(err, res) {
+
+
+// wunderground.conditions(q, function(err, res) {
+// 	console.log(err||res);
+// });
+
+wunderground.currenthurricane({}, function(err, res) {
 	console.log(err||res);
-});
+})
