@@ -10,7 +10,7 @@ var Client = module.exports = function(api_key) {
 	// currenthurricane accepts no args, just /currenthurricane/view.(format) (i.e. json)
 	this.actions = ['forecast', 'conditions', 'forecast10day', 'hourly', 'hourly10day', 'almanac', 'alerts', 'astronomy', 'rawtide', 'tide', 'yesterday', 'webcams', 'geolookup', 'currenthurricane']
 	this.uri = {
-		protocol  : 'http://',
+		protocol  : 'https://',
 		base      : 'api.wunderground.com/api/',
 		separator : '/q/',
 		format    : '.json'
