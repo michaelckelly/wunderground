@@ -12,7 +12,9 @@ npm install wunderground
 
 Why?
 ====
-Becuase spending more than a few minutes getting this API up-and-running is better spent making your app awesome
+Becuase spending more than a few minutes getting this API up-and-running is better spent making your app awesome.
+
+There are a few other modules out there that integrate the Wunderground API but I wasn't quite satisifed with them. 
 
 Usage
 =====
@@ -32,3 +34,11 @@ wunderground.forecast10day(query, function(err, forecast) {
 ```
 
 The module accepts a variety of parameters in the query object:
+* city
+* state
+* zip
+* airport code
+* PWS code
+* country
+* latitude
+* longitude
