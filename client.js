@@ -1,6 +1,6 @@
 var request = require('request');
 
-var Client = module.exports = function(api_key) {
+var Client = module.exports = function(api_key, language) {
 	if(!api_key || api_key == '') {
 		throw new Error('No Wunderground API key provided.');
 	}
@@ -11,6 +11,7 @@ var Client = module.exports = function(api_key) {
 		protocol  : 'https://',
 		base      : 'api.wunderground.com/api/',
 		separator : '/q/',
+		language  : 'lang:EN',
 		format    : '.json'
 	};
 

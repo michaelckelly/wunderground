@@ -1,6 +1,5 @@
 wunderground
 ============
-
 A simple wrapper around the [Wunderground API](http://www.wunderground.com/weather/api) for Node.
 
 Installation
@@ -25,7 +24,7 @@ var wunderground = require('node-wunderground')('my-api-key');
 
 var query = {
 	city  : 'San Francisco',
-	state : 'California'
+	state : 'CA' // two-letter state code
 };
 
 wunderground.forecast10day(query, function(err, forecast) {
@@ -42,3 +41,29 @@ The module accepts a variety of parameters in the query object:
 * country
 * latitude
 * longitude
+
+Advanced Usage
+==============
+You can also acess the `wunderground.execute` method directly--the main advantage of this is you can specify multiple data sources to receive in a single request.
+
+For example:
+```javascript
+var query = {
+	zip : '20854'
+};
+var actions = ['forecast, 'forecast10day', 'conditions'];
+wunderground.execute(actions, query, function(err, result) {
+	// Result has the current forecase, the 10 day forecast, and current conditions
+});
+```
+
+Localization
+============
+The Wunderground API provides results in a large range of languages.  You can specify the language for API requests on initlaization.  Example:
+```javascript
+var wunderground = require('node-wunderground')('my-api-key', 'FR');
+```
+All requests will be returned in French.  All languages are specified with a two letter, capitalized string.  See the [official documentation](http://www.wunderground.com/weather/api/d/docs?d=language-support) for the full list.
+
+License & Disclaimer
+====================
