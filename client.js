@@ -1,5 +1,11 @@
+// Dependency
 var request = require('request');
 
+/**
+ * Constructor
+ * @param api_key
+ * @param language
+*/
 var Client = module.exports = function(api_key, language) {
 	if(!api_key || api_key == '') {
 		throw new Error('No Wunderground API key provided.');
@@ -11,9 +17,11 @@ var Client = module.exports = function(api_key, language) {
 		protocol  : 'https://',
 		base      : 'api.wunderground.com/api/',
 		separator : '/q/',
-		language  : 'lang:EN',
 		format    : '.json'
 	};
+
+	// Set our language if given otherwise default to English
+	this.language = (language) ? 'lang:' + language : 'lang:EN';
 
 	var self = this;
 	this.actions.forEach(function(method) {
@@ -43,7 +51,7 @@ Client.prototype.execute = function(action, query, cbk) {
 			request({ uri : api_request, json : true }, function(err, body, res) {
 				if(!err) {
 					if(res && res.response && res.response.error) {
-						return cbk(res);
+						return cbk(res.response);
 					} else return cbk(null, res);
 				} else {
 					return cbk(err);
@@ -59,7 +67,6 @@ Client.prototype.execute = function(action, query, cbk) {
 Client.prototype._buildQuery = function(q, action, cbk) {
 	var parameters    = []
 	  , parsed_action = '';
-
 
 	parsed_action = (Array.isArray(action)) ? action.join('/') : action;
 
@@ -89,11 +96,9 @@ Client.prototype._buildQuery = function(q, action, cbk) {
 	// Any valid request has at least one parameter
 	if(parameters.length == 0) {
 		return cbk('Invalid query object');
-	}
-
-	return cbk(null, parsed_action, parameters);
+	} else return cbk(null, parsed_action, parameters);
 }
 
 Client.prototype._buildUri = function(action, pieces) {
-	return (this.uri.protocol + this.uri.base + this.key + '/' + action + this.uri.separator + pieces.join('/') + this.uri.format);
+	return (this.uri.protocol + this.uri.base + this.key + '/' + action + '/' + this.language + this.uri.separator + pieces.join('/') + this.uri.format);
 }
