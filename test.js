@@ -1,7 +1,7 @@
 var wunderground = require('./')('5359fc99b34815ef');
 
 var q = {
-	zip           : '1'
+	zip           : '20854'
 };
 
 var action = ['conditions'];

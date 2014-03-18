@@ -1,10 +1,13 @@
-// Dependency
+/**
+ * Dependencies
+ */
 var request = require('request');
 
 /**
- * Constructor
- * @param api_key
- * @param language
+ * Client constructor
+ * @param {String} api_key
+ * @param {String} language
+ * @api public
 */
 var Client = module.exports = function(api_key, language) {
 	if(!api_key || api_key == '') {
@@ -23,6 +26,7 @@ var Client = module.exports = function(api_key, language) {
 	// Set our language if given otherwise default to English
 	this.language = (language) ? 'lang:' + language : 'lang:EN';
 
+	// Generate helper functions for each wunderground API verb
 	var self = this;
 	this.actions.forEach(function(method) {
 		self[method] = function() {
@@ -36,10 +40,11 @@ var Client = module.exports = function(api_key, language) {
 }
 
 /**
- * Generic function to execute a wunderground API call
- * @param action
- * @param q the query
- * @param cbk
+ * Executes a wunderground API call
+ * @param {String/Array} action
+ * @param {Object} query
+ * @param {Function} cbk callback
+ * @api public
  */
 Client.prototype.execute = function(action, query, cbk) {
 	var self = this;
@@ -63,6 +68,10 @@ Client.prototype.execute = function(action, query, cbk) {
 
 /**
  * Build a valid query out of our query wrapper
+ * @param {Object} q
+ * @param {String,Array} action
+ * @param {Function} cbk
+ * @api private
  */
 Client.prototype._buildQuery = function(q, action, cbk) {
 	var parameters    = []
@@ -99,6 +108,12 @@ Client.prototype._buildQuery = function(q, action, cbk) {
 	} else return cbk(null, parsed_action, parameters);
 }
 
+/**
+ * Build a wunderground API request URI
+ * @param {String} action
+ * @param {Array} pieces
+ * @api private
+ */
 Client.prototype._buildUri = function(action, pieces) {
 	return (this.uri.protocol + this.uri.base + this.key + '/' + action + '/' + this.language + this.uri.separator + pieces.join('/') + this.uri.format);
 }
