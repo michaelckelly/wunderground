@@ -41,7 +41,7 @@ var Client = module.exports = function(api_key, language) {
 
 /**
  * Executes a wunderground API call
- * @param {String/Array} action
+ * @param {String|Array} action
  * @param {Object} query
  * @param {Function} cbk callback
  * @api public
@@ -69,7 +69,7 @@ Client.prototype.execute = function(action, query, cbk) {
 /**
  * Build a valid query out of our query wrapper
  * @param {Object} q
- * @param {String,Array} action
+ * @param {String|Array} action
  * @param {Function} cbk
  * @api private
  */

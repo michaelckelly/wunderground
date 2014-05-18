@@ -37,7 +37,7 @@ The module accepts a variety of parameters in the query object:
 * state
 * zip
 * airport code
-* PWS code
+* PWS code (personal weather station)
 * country
 * latitude
 * longitude
@@ -51,9 +51,9 @@ For example:
 var query = {
 	zip : '20854'
 };
-var actions = ['forecast, 'forecast10day', 'conditions'];
+var actions = ['forecast', 'forecast10day', 'conditions'];
 wunderground.execute(actions, query, function(err, result) {
-	// Result has the current forecase, the 10 day forecast, and current conditions
+	// Result has the current forecast, the 10 day forecast, and the current conditions for the US zip code 20854.
 });
 ```
 
