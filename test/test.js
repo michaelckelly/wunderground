@@ -5,7 +5,7 @@
 var assert = require('assert')
   , should = require('should')
   , Client = require('../client')
-  , testKey = '5359fc99b34815ef';
+  , testKey = 'YOUR API KEY HERE';
 
 describe('Client', function() {
 	describe('#constructor', function() {
