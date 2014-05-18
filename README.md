@@ -9,6 +9,8 @@ Installation is quick and easy via NPM:
 npm install wunderground
 ```
 
+You will also need a valid [Wunderground API key](http://www.wunderground.com/weather/api).
+
 Why?
 ====
 Becuase spending more than a few minutes getting this API up-and-running is better spent making your app awesome.
@@ -17,7 +19,7 @@ There are a few other modules out there that integrate the Wunderground API but 
 
 Usage
 =====
-The module is designed to be simple and easy to use and follows Wunderground's API verbiage almost exclusively.
+The module is designed to be simple and easy to use and follows Wunderground's API verbiage almost exclusively.  Please see the Wunderground documentation for a list of all available options.
 
 ```javascript
 var wunderground = require('node-wunderground')('my-api-key');
@@ -27,20 +29,49 @@ var query = {
 	state : 'CA' // two-letter state code
 };
 
-wunderground.forecast10day(query, function(err, forecast) {
-	// do fun stuff here!
+// Print San Francisco's high and low temperatures for the next 10 days
+wunderground.forecast10day(query, function(err, forecasts) {
+	if(err) {
+		// uh-oh!
+	} else {
+		var forecasts = res.forecast.simpleforecast.forecastday;
+		for(var i = 0; i < forecasts.length; i++) {
+			var f = forecasts[i];
+			console.log([f.date.month, f.date.day, f.date.year].join('/') + ' - High: '+ f.high.fahrenheit +', Low: '+ f.low.fahrenheit);
+		}
+	}});
+
+// OR:
+
+wunderground.conditions(query, function(err, conditions) {
+	// current conditions
+	if(!err) {
+		console.log('In Sanfrancisco, CA, it currently feels like '+ conditions.current_observation.temp_f);
+	}
 });
 ```
 
-The module accepts a variety of parameters in the query object:
+
+The module accepts a variety of parameters in the query object (formal paramater names included in parenthesis if different):
+* zip
 * city
 * state
-* zip
-* airport code
-* PWS code (personal weather station)
+* airport code (airport)
+* PWS code (pws)
 * country
-* latitude
-* longitude
+* latitude (lat)
+* longitude (lng)
+
+NOTE: Latitude and longitude BOTH required.  Providing only one is illegal.  
+
+You can provide any number of parameters but there is a precedence and established patterns:
+* city & state
+* zip
+* country & city
+* lat & lng
+* airport
+* pws
+* country
 
 Advanced Usage
 ==============
@@ -67,3 +98,4 @@ All requests will be returned in French.  All languages are specified with a two
 
 License & Disclaimer
 ====================
+All usage of the Wunderground API is subjet to the API's terms of service, which can be found at: [http://www.wunderground.com/weather/api/d/terms.html](http://www.wunderground.com/weather/api/d/terms.html)
