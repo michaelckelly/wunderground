@@ -83,7 +83,7 @@ Client.prototype._buildQuery = function(q, action, cbk) {
 	if(parsed_action == 'currenthurricane') {
 		parameters.push('view');
 	} else if(parsed_action == 'history') {
-		parsed_action == parsed_action +'_' + q.date;
+		parsed_action = (parsed_action + '_' + q.date);
 	}
 
 	if(q.city && q.state) {

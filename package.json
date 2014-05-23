@@ -1,6 +1,6 @@
 {
   "name": "wunderground",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Michael Kelly <m@michaelckelly.com>",
   "description": "a simple wrapper around the wunderground API",
   "repository": {
